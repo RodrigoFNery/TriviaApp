@@ -1,67 +1,54 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native'
 
 //Components
 import Header from '../components/Header';
-import QuestionCard, { QuestionCardAnswer } from '../components/QuestionCard';
+import QuestionCard from '../components/QuestionCard';
 
 //Translation
 import { translate } from "../locales";
 
 //Navigation
 import { IStackScreenProps } from '../navigation/StackScreenProps';
+import { useRoute } from '@react-navigation/native';
+
+//Redux
+import { connect, ConnectedProps } from 'react-redux'
+import { RootState } from '../redux';
+import { store } from '../redux';
+import * as AppActions from "../redux/actions/appActions";
 
 //styling
 import styles from '../styles/appStyles';
 
+//Utils
 import { decode } from 'html-entities';
-import { useRoute } from '@react-navigation/native';
-import { NavigatorParamList } from '../navigation/AppNavigator';
 
+interface QuizProps extends AppStateProps, IStackScreenProps { }
 
-const QuizScreen: React.FC<IStackScreenProps> = (props) => {
-  // const [isLoading, setLoading] = useState(true);
-  // const [questions, setQuestions] = useState<QuestionProps[]>([]);
+const QuizScreen = (props: QuizProps) => {
   const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<QuestionCardAnswer[]>([])
+  const { questions, navigation} = props;
 
-  // const loadQuestions = async () => {
-  //   try {
-  //     const results: [QuestionProps] = await getQuestionsFromApi()
-  //     setQuestions(results);
-  //   } catch (error) {
-  //     console.error(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
-  const route = useRoute();
-
-  const questions = route.params?.questions
-
-
-  const { navigation } = props;
-
-  const pullCardAnswer = (questionCardAnswer: QuestionCardAnswer): void => {
-    console.log(questionCardAnswer.index + ' : ' + questionCardAnswer.answer)
-    answers.push(questionCardAnswer)
-    if (index < 9) {
+  const pullCardAnswer = (answer: string): void => {
+    questions[index].user_answer = answer
+    if (index < questions.length - 1) {
       setIndex(index + 1)
     } else {
       navigation.navigate('Results')
     }
   }
+
   return (
     questions ? (
       <View style={styles.container}>
         <Header title={questions[index]?.category} />
-        <QuestionCard index={index} question={decode(questions[index]?.question)} callbackFunction={pullCardAnswer} />
+        <QuestionCard question={decode(questions[index]?.question)} callbackFunction={pullCardAnswer} />
         <View style={styles.contentView}>
           <View style={styles.counterTextContainer}>
             <Text style={{ ...styles.defaultText, marginRight: 10 }}>{index + 1}</Text>
             <Text style={styles.defaultText}>{translate('of')}</Text>
-            <Text style={{ ...styles.defaultText, marginLeft: 10 }}>10</Text>
+            <Text style={{ ...styles.defaultText, marginLeft: 10 }}>{questions.length}</Text>
           </View>
         </View>
       </View>
@@ -69,4 +56,15 @@ const QuizScreen: React.FC<IStackScreenProps> = (props) => {
   )
 }
 
-export default memo(QuizScreen)
+const mapStateToProps = (state: RootState) => {
+  return {
+    questions: state.appReducer.questions,
+  };
+};
+
+const connector = connect(mapStateToProps);
+
+type AppStateProps = ConnectedProps<typeof connector>;
+
+export default connector(QuizScreen)
+

@@ -8,29 +8,21 @@ import { translate } from "../locales";
 import styles from '../styles/appStyles';
 
 //Interfaces
-export interface QuestionCardAnswer {
-  index: number,
-  answer: string
-}
-
 export interface QuestionCardProps {
-  index: number,
   question: string,
-  callbackFunction: (questionCardAnswer: QuestionCardAnswer) => void
+  callbackFunction: (answer: string) => void
 }
 
 const QuestionCard: React.FC<QuestionCardProps> = (props) => {
 
-  const { index, question, callbackFunction } = props
+  const {question, callbackFunction } = props
 
   const onTruePress = () => {
-    const questionCardAnswer: QuestionCardAnswer = { index: index, answer: 'TRUE' }
-    callbackFunction(questionCardAnswer)
+    callbackFunction('TRUE' )
   }
 
   const onFalsePress = () => {
-    const questionCardAnswer: QuestionCardAnswer = { index: index, answer: 'FALSE' }
-    callbackFunction(questionCardAnswer)
+    callbackFunction('FALSE')
   }
 
   return (

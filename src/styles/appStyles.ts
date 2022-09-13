@@ -584,6 +584,9 @@ type Style = {
     headerText: TextStyle;
     contentView: TextStyle;
     defaultText: TextStyle;
+    resultsRows: ViewStyle;
+    resultsText: TextStyle;
+    scrollView: ViewStyle;
     homeButton: ViewStyle;
 };
 
@@ -641,6 +644,25 @@ export default StyleSheet.create<Style>({
         fontSize: HUGE_FONT_SIZE,
         textAlign: 'center',
     },
+
+    resultsRows: {
+        flexDirection: 'row',
+        marginTop: 10,
+        marginRight: 20
+    },
+
+    resultsText:{
+        fontSize: HUGE_FONT_SIZE,
+        textAlign: 'left',
+        marginLeft: 10,
+        marginRight: 20 
+    },
+
+    scrollView: {
+        flex: 1,
+        alignSelf: 'stretch',
+    },
+
     homeButton:{
         borderColor: 'transparent',
         backgroundColor:  'transparent',

@@ -1,6 +1,13 @@
 import React, { memo, useState } from 'react';
-import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { getQuestionsFromApi, QuestionProps } from '../api/api';
+import { Text, View, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
+import { getQuestionsFromApi } from '../api/api';
+
+//Entities
+import { QuestionProps } from '../entities/Question';
+
+// Redux
+import { store } from '../redux/store';
+import * as AppActions from "../redux/actions/appActions";
 
 //Components
 import Header from '../components/Header';
@@ -10,7 +17,6 @@ import { translate } from "../locales";
 
 //Navigation
 import { IStackScreenProps } from '../navigation/StackScreenProps';
-import { NavigatorParamList } from '../navigation/AppNavigator';
 
 //styling
 import styles from '../styles/appStyles';
@@ -18,25 +24,27 @@ import styles from '../styles/appStyles';
 const HomeScreen: React.FC<IStackScreenProps> = (props) => {
   const { navigation, route } = props;
   const [isLoading, setLoading] = useState(false);
-  const [questions, setQuestions] = useState<QuestionProps[]>([]);
 
   const loadQuestions = async () => {
     setLoading(true)
-    getQuestionsFromApi().then((results: [QuestionProps]) => {
-      setQuestions(results);
-    }).catch((error) => {
-      console.error(error);
-    }).finally(() => {
+    try {
+      const questions: QuestionProps[] = await getQuestionsFromApi()
+      store.dispatch(AppActions.setQuestions(questions))
+      navigation.navigate('Quiz')
+    } catch (error) {
+      Alert.alert(
+        "Error",
+        "Could not load questions:" + error,
+        [{ text: "OK" }]
+      );
+    } finally {
       setLoading(false);
-    })
+    }
   }
 
+
   const onPress = () => {
-    loadQuestions().then(() => {
-      navigation.navigate('Quiz', {
-        questions: questions,
-      } as NavigatorParamList)
-    })
+    loadQuestions()
   }
 
   return (

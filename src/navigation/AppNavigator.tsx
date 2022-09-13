@@ -14,22 +14,11 @@ import HomeScreen from '../screens/HomeScreen';
 import QuizScreen from '../screens/QuizScreen';
 import ResultsScreen from '../screens/ResultsScreen';
 
-//Styling
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { QuestionProps } from '../api/api';
-
-
 // if (Platform.OS !== 'web') {
 //   LogBox.ignoreLogs(['Require cycle:']);
 // }
 
 const Stack = createNativeStackNavigator();
-
-export type NavigatorParamList = RouteProp<RootStackParamList, 'Profile'>;
-
-export type NavigatorParamList = {
-  questions: QuestionProps[]
-}
 
 const AppNavigator = () => {
   return (
