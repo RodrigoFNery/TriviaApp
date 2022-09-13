@@ -1,3 +1,8 @@
+/**
+ * en-US.ts
+ * Holds the strings for English-USA language
+ */
+
 const en_us = {
 
     //HomeScreen
@@ -5,6 +10,8 @@ const en_us = {
     HomeInstruction: 'You will be presented with 10 True or False questions.',
     HomePrompt: 'Can you score 100%?',
     HomeButtonText: 'BEGIN',
+    CouldNotLoadQuestions: 'Could not load questions:',
+    ThereIsNoQuestionsToShow: 'There is no questions to show',
 
     //QuizScreen
     QuizHeader: 'Entertainment: Video Games',
@@ -15,7 +22,11 @@ const en_us = {
 
     //ResultsScreen
     YouScored: 'You Scored',
-    PlayAgain: 'PLAY AGAIN?'
+    PlayAgain: 'PLAY AGAIN?',
+
+    //Generic
+    Error: 'Error',
+    OK: 'OK'
 
 }
 

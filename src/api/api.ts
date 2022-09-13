@@ -1,3 +1,9 @@
+/**
+ * api.ts
+ * Privides functions to acess the server APIs
+ */
+
+
 //Entities
 import { QuestionProps } from "../entities/Question";
 

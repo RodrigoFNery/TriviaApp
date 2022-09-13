@@ -1,3 +1,8 @@
+/**
+ * QuestionCard.tsx
+ * Renders the Question Card
+ */
+
 import React, { memo } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native'
 

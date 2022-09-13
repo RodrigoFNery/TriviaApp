@@ -1,3 +1,8 @@
+/**
+ * React Native - Typescript
+ * Trivia App - G2i
+ */
+
 import React from 'react'
 
 //Redux

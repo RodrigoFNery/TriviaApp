@@ -1,3 +1,8 @@
+/**
+ * index.ts
+ * Provides the root Reducer
+ */
+
 //Redux
 import { combineReducers } from 'redux';
 import { AppReducer } from './appReducer';

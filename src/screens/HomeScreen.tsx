@@ -1,5 +1,12 @@
+/**
+ * AllSeries.tsx
+ * Renders the Home screen
+ */
+
 import React, { memo, useState } from 'react';
 import { Text, View, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
+
+//APIs
 import { getQuestionsFromApi } from '../api/api';
 
 //Entities
@@ -16,7 +23,7 @@ import Header from '../components/Header';
 import { translate } from "../locales";
 
 //Navigation
-import { IStackScreenProps } from '../navigation/StackScreenProps';
+import { IStackScreenProps } from '../navigation/AppNavigator';
 
 //styling
 import styles from '../styles/appStyles';
@@ -29,13 +36,21 @@ const HomeScreen: React.FC<IStackScreenProps> = (props) => {
     setLoading(true)
     try {
       const questions: QuestionProps[] = await getQuestionsFromApi()
-      store.dispatch(AppActions.setQuestions(questions))
-      navigation.navigate('Quiz')
+      if (questions && questions.length > 0) {
+        store.dispatch(AppActions.setQuestions(questions))
+        navigation.navigate('Quiz')
+      } else {
+        Alert.alert(
+          translate("Error"),
+          translate("ThereIsNoQuestionsToShow"),
+          [{ text: translate("OK") }]
+        );
+      }
     } catch (error) {
       Alert.alert(
-        "Error",
-        "Could not load questions:" + error,
-        [{ text: "OK" }]
+        translate("Error"),
+        translate("CouldNotLoadQuestions") + error,
+        [{ text: translate("OK") }]
       );
     } finally {
       setLoading(false);

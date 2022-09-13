@@ -1,22 +1,26 @@
-import * as React from 'react';
-import { Platform, LogBox } from 'react-native';
-import { StatusBar } from 'expo-status-bar'
+/**
+ * en-US.ts
+ * Holds the app navigation logic
+ */
 
-//Translation
-import { translate } from "../locales";
+import * as React from 'react';
+import { StatusBar } from 'expo-status-bar'
 
 //Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ParamListBase, RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 // Screens
 import HomeScreen from '../screens/HomeScreen';
 import QuizScreen from '../screens/QuizScreen';
 import ResultsScreen from '../screens/ResultsScreen';
 
-// if (Platform.OS !== 'web') {
-//   LogBox.ignoreLogs(['Require cycle:']);
-// }
+export interface IStackScreenProps {
+    navigation: StackNavigationProp<any>;
+    route: RouteProp<ParamListBase, any>;
+}
 
 const Stack = createNativeStackNavigator();
 

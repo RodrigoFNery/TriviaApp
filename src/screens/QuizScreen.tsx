@@ -1,3 +1,8 @@
+/**
+ * AllSeries.tsx
+ * Renders the Quiz screen
+ */
+
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native'
 
@@ -9,14 +14,11 @@ import QuestionCard from '../components/QuestionCard';
 import { translate } from "../locales";
 
 //Navigation
-import { IStackScreenProps } from '../navigation/StackScreenProps';
-import { useRoute } from '@react-navigation/native';
+import { IStackScreenProps } from '../navigation/AppNavigator';
 
 //Redux
 import { connect, ConnectedProps } from 'react-redux'
 import { RootState } from '../redux';
-import { store } from '../redux';
-import * as AppActions from "../redux/actions/appActions";
 
 //styling
 import styles from '../styles/appStyles';
@@ -28,14 +30,16 @@ interface QuizProps extends AppStateProps, IStackScreenProps { }
 
 const QuizScreen = (props: QuizProps) => {
   const [index, setIndex] = useState(0);
-  const { questions, navigation} = props;
+  const { questions, navigation } = props;
 
   const pullCardAnswer = (answer: string): void => {
-    questions[index].user_answer = answer
-    if (index < questions.length - 1) {
-      setIndex(index + 1)
-    } else {
-      navigation.navigate('Results')
+    if (questions && index < questions.length) {
+      questions[index].user_answer = answer
+      if (index < questions.length - 1) {
+        setIndex(index + 1)
+      } else {
+        navigation.navigate('Results')
+      }
     }
   }
 

@@ -1,3 +1,8 @@
+/**
+ * QuestionProps.ts
+ * Represents the question entity
+ */
+
 //Interfaces
 export interface QuestionProps {
     category: string,

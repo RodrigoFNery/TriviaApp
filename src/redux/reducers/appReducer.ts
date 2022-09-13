@@ -1,3 +1,8 @@
+/**
+ * appReducers.ts
+ * Holds the app Redux Reducers
+ */
+
 //Redux
 import * as AppActions from "../actions/appActions";
 import { AppAction } from "../actions/appActions";

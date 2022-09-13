@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+/**
+ * AllSeries.tsx
+ * Renders the Quiz screen
+ */
+
+import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 //Components
 import Header from '../components/Header';
-import QuestionCard from '../components/QuestionCard';
 
 //Translation
 import { translate } from "../locales";
 
 //Navigation
-import { IStackScreenProps } from '../navigation/StackScreenProps';
-import { useRoute } from '@react-navigation/native';
+import { IStackScreenProps } from '../navigation/AppNavigator';
 
 //Redux
 import { connect, ConnectedProps } from 'react-redux'

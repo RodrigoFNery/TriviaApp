@@ -1,3 +1,8 @@
+/**
+ * Header.tsx
+ * Renders the app screens Header
+ */
+
 import React, { memo } from "react";
 import { Text, View } from "react-native";
 
