@@ -3,34 +3,34 @@
  * Renders the Quiz screen
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 
-//Components
-import Header from '../components/Header';
-import QuestionCard from '../components/QuestionCard';
+// Components
+import Header from '../components/Header'
+import QuestionCard from '../components/QuestionCard'
 
-//Translation
-import { translate } from "../locales";
+// Translation
+import { translate } from '../locales'
 
-//Navigation
-import { IStackScreenProps } from '../navigation/AppNavigator';
+// Navigation
+import { IStackScreenProps } from '../navigation/AppNavigator'
 
-//Redux
+// Redux
 import { connect, ConnectedProps } from 'react-redux'
-import { RootState } from '../redux';
+import { RootState } from '../redux'
 
-//styling
-import styles from '../styles/appStyles';
+// styling
+import styles from '../styles/appStyles'
 
-//Utils
-import { decode } from 'html-entities';
+// Utils
+import { decode } from 'html-entities'
 
 interface QuizProps extends AppStateProps, IStackScreenProps { }
 
 const QuizScreen = (props: QuizProps) => {
-  const [index, setIndex] = useState(0);
-  const { questions, navigation } = props;
+  const [index, setIndex] = useState(0)
+  const { questions, navigation } = props
 
   const pullCardAnswer = (answer: string): void => {
     if (questions && index < questions.length) {
@@ -44,7 +44,8 @@ const QuizScreen = (props: QuizProps) => {
   }
 
   return (
-    questions ? (
+    questions
+      ? (
       <View style={styles.container}>
         <Header title={questions[index]?.category} />
         <QuestionCard question={decode(questions[index]?.question)} callbackFunction={pullCardAnswer} />
@@ -56,19 +57,19 @@ const QuizScreen = (props: QuizProps) => {
           </View>
         </View>
       </View>
-    ) : (<></>)
+        )
+      : (<></>)
   )
 }
 
 const mapStateToProps = (state: RootState) => {
   return {
-    questions: state.appReducer.questions,
-  };
-};
+    questions: state.appReducer.questions
+  }
+}
 
-const connector = connect(mapStateToProps);
+const connector = connect(mapStateToProps)
 
-type AppStateProps = ConnectedProps<typeof connector>;
+type AppStateProps = ConnectedProps<typeof connector>
 
 export default connector(QuizScreen)
-

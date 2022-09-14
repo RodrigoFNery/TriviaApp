@@ -3,14 +3,14 @@
  * Provides the root Reducer
  */
 
-//Redux
-import { combineReducers } from 'redux';
-import { AppReducer } from './appReducer';
+// Redux
+import { combineReducers } from 'redux'
+import { AppReducer } from './appReducer'
 
 const rootReducer = combineReducers({
-  appReducer: AppReducer,
-});
+  appReducer: AppReducer
+})
 
 export type RootState = ReturnType<typeof rootReducer>
 
-export { rootReducer };
+export { rootReducer }

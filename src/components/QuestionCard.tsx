@@ -3,27 +3,26 @@
  * Renders the Question Card
  */
 
-import React, { memo } from 'react';
+import React, { memo } from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 
-//Translation
-import { translate } from "../locales";
+// Translation
+import { translate } from '../locales'
 
-//styling
-import styles from '../styles/appStyles';
+// styling
+import styles from '../styles/appStyles'
 
-//Interfaces
+// Interfaces
 export interface QuestionCardProps {
-  question: string,
+  question: string
   callbackFunction: (answer: string) => void
 }
 
 const QuestionCard: React.FC<QuestionCardProps> = (props) => {
-
-  const {question, callbackFunction } = props
+  const { question, callbackFunction } = props
 
   const onTruePress = () => {
-    callbackFunction('TRUE' )
+    callbackFunction('TRUE')
   }
 
   const onFalsePress = () => {

@@ -3,35 +3,34 @@
  * Renders the Quiz screen
  */
 
-import React from 'react';
+import React from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
-//Components
-import Header from '../components/Header';
+// Components
+import Header from '../components/Header'
 
-//Translation
-import { translate } from "../locales";
+// Translation
+import { translate } from '../locales'
 
-//Navigation
-import { IStackScreenProps } from '../navigation/AppNavigator';
+// Navigation
+import { IStackScreenProps } from '../navigation/AppNavigator'
 
-//Redux
+// Redux
 import { connect, ConnectedProps } from 'react-redux'
-import { RootState } from '../redux';
-import { store } from '../redux';
-import * as AppActions from "../redux/actions/appActions";
+import { RootState, store } from '../redux'
+import * as AppActions from '../redux/actions/appActions'
 
-//styling
-import styles from '../styles/appStyles';
+// styling
+import styles from '../styles/appStyles'
 
-//Utils
-import { decode } from 'html-entities';
-import { QuestionProps } from '../entities/Question';
+// Utils
+import { decode } from 'html-entities'
+import { QuestionProps } from '../entities/Question'
 
 interface ResultsProps extends AppStateProps, IStackScreenProps { }
 
 const ResultsScreen = (props: ResultsProps) => {
-  const { questions, navigation } = props;
+  const { questions, navigation } = props
 
   const onPress = () => {
     store.dispatch(AppActions.setQuestions([]))
@@ -57,7 +56,8 @@ const ResultsScreen = (props: ResultsProps) => {
   }
 
   return (
-    questions ? (
+    questions
+      ? (
       <View style={styles.container}>
         <Header title={translate('YouScored') + '\n' + getScoreText()} />
         <ScrollView style={styles.scrollView}>
@@ -67,26 +67,26 @@ const ResultsScreen = (props: ResultsProps) => {
                 <Text style={{ ...styles.resultsText, fontWeight: 'bold' }}>{getSignText(question)}</Text>
                 <Text style={{ ...styles.resultsText }}>{decode(question.question)}</Text>
               </View>
-            );
+            )
           })}
         </ScrollView >
         <TouchableOpacity onPress={onPress}>
           <Text style={styles.defaultText}>{translate('PlayAgain')}</Text>
         </TouchableOpacity>
       </View>
-    ) : (<></>)
+        )
+      : (<></>)
   )
 }
 
 const mapStateToProps = (state: RootState) => {
   return {
-    questions: state.appReducer.questions,
-  };
-};
+    questions: state.appReducer.questions
+  }
+}
 
-const connector = connect(mapStateToProps);
+const connector = connect(mapStateToProps)
 
-type AppStateProps = ConnectedProps<typeof connector>;
+type AppStateProps = ConnectedProps<typeof connector>
 
 export default connector(ResultsScreen)
-

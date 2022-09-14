@@ -3,26 +3,26 @@
  * Holds the app navigation logic
  */
 
-import * as React from 'react';
+import * as React from 'react'
 import { StatusBar } from 'expo-status-bar'
 
-//Navigation
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ParamListBase, RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+// Navigation
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { ParamListBase, RouteProp } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 // Screens
-import HomeScreen from '../screens/HomeScreen';
-import QuizScreen from '../screens/QuizScreen';
-import ResultsScreen from '../screens/ResultsScreen';
+import HomeScreen from '../screens/HomeScreen'
+import QuizScreen from '../screens/QuizScreen'
+import ResultsScreen from '../screens/ResultsScreen'
 
 export interface IStackScreenProps {
-    navigation: StackNavigationProp<any>;
-    route: RouteProp<ParamListBase, any>;
+  navigation: StackNavigationProp<any>
+  route: RouteProp<ParamListBase, any>
 }
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 const AppNavigator = () => {
   return (
@@ -46,7 +46,7 @@ const AppNavigator = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
 
 export default AppNavigator

@@ -3,28 +3,28 @@
  * Holds the app Redux Actions
  */
 
-//Entities
-import { QuestionProps } from "../../entities/Question";
+// Entities
+import { QuestionProps } from '../../entities/Question'
 
-//ActionConstants
+// ActionConstants
 export enum AppActionConstants {
-    SET_QUESTIONS = 'SET_QUESTIONS',
+  SET_QUESTIONS = 'SET_QUESTIONS',
 }
 
-//Interfaces
+// Interfaces
 export interface SetQuestions {
-    readonly type: typeof AppActionConstants.SET_QUESTIONS
-    questions: QuestionProps[]
+  readonly type: typeof AppActionConstants.SET_QUESTIONS
+  questions: QuestionProps[]
 }
 
 export type AppAction = SetQuestions
 
-export type AppDispatch = (action: AppAction) => void;
+export type AppDispatch = (action: AppAction) => void
 
-//Functions
-export function setQuestions(questions: QuestionProps[]) {
-    return {
-        type: AppActionConstants.SET_QUESTIONS,
-        questions: questions
-    };
+// Functions
+export function setQuestions (questions: QuestionProps[]) {
+  return {
+    type: AppActionConstants.SET_QUESTIONS,
+    questions
+  }
 }
